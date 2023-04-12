@@ -20,7 +20,7 @@
 			<ul>
 				<li>projets</li>
 				<li>contact</li>
-				<li>login</li>
+				<a href="login.html" class="link" id="loginStatus"><li>login</li></a>
 				<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 			</ul>
 		</nav>
@@ -47,10 +47,6 @@
 			</div>
 			<!--Filtre-->
 			<div class="filter">
-				<button class="btnAll active">Tous</button>
-				<button class="btnObjects inactive">Objets</button>
-				<button class="btnAppartments inactive">Appartements</button>
-				<button class="btnHotels-Restaurants inactive">Hotels &amp; Restaurants</button>
 			</div>
 			<div class="gallery"></div>
 		</section>
@@ -80,23 +76,38 @@
 		fetch("http://localhost:5678/api/works")
 			.then(response => response.json())
 			.then(data => {
-				const div = document.querySelector("#portfolio .gallery");
-				div.innerHTML = data.map(elt => `
-      <figure id="item_${elt.id}" class="${elt.category.name}">
-        <img src="${elt.imageUrl}" alt="${elt.title}">
-        <figcaption>${elt.title}</figcaption>
-      </figure>`).join("");
+				const div = document.querySelector("#portfolio .gallery");				
+				data.forEach(elt=> {
+					console.log(elt)
+					const parent = document.createElement ('figure')
+					const child_img = document.createElement ('img')
+					const child_figcaption = document.createElement ('figcaption')
+
+					child_figcaption.innerHTML = elt.title
+					child_img.src = elt.imageUrl
+					child_img.alt= elt.title
+
+					parent.className= elt.category.name
+					parent.append(child_img)
+					parent.append(child_figcaption)
+					div.append(parent)
+				})
 			})
 			.catch(error => console.error(error));
-		const div = document.querySelector("#portfolio .gallery");
-		const obj = document.querySelector('.btnObjects');
-		const appart = document.querySelector('.btnAppartments');
-		const hotels = document.querySelector('.btnHotels-Restaurants');
-		const All = document.querySelector('.btnAll');
 
-		function filterItems(className) {
+		const filters_arr = ['Tous', 'Objets', 'Appartements', 'Hôtels & restaurants' ],
+		div_filter = document.querySelector('#portfolio .filter')
+		//Intégration dynamique des boutons
+		filters_arr.forEach(item => {
+			const btn= document.createElement('button')
+			btn.class = 'btn' + item
+			btn.innerText= item 
+			btn.addEventListener("click", (e) => filterItems (e,item))
+			div_filter.append(btn)
+		})
+
+		function filterItems(e,className) {
 			const tmp = document.querySelectorAll('section>div>figure');
-			console.log(tmp)
 			tmp.forEach(item => {
 				item.classList.remove('off');
 				if (item.className !== className) {
@@ -105,32 +116,6 @@
 			});
 		}
 
-		All.addEventListener('click', () => {
-			const allFigures = document.querySelectorAll('section > div > figure');
-			allFigures.forEach(figure => {
-				figure.classList.remove('off');
-			});
-		});
-
-		obj.addEventListener('click', () => filterItems('Objets'));
-		appart.addEventListener('click', () => filterItems('Appartements'));
-		hotels.addEventListener('click', () => filterItems('Hotels & restaurants'));
-
-		const buttons = document.querySelectorAll(".filter button");
-
-		buttons.forEach((button) => {
-			button.addEventListener("click", () => {
-				buttons.forEach((btn) => {
-					btn.classList.remove("active");
-					btn.style.backgroundColor = "white";
-					btn.style.color = "#1D6154";
-				});
-
-				button.classList.add("active");
-				button.style.backgroundColor = "#1D6154";
-				button.style.color = "white";
-			});
-		});
 	</script>
 
 </body>
