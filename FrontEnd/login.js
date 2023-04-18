@@ -27,12 +27,9 @@ loginForm.addEventListener("submit", (event) => {
       } else {
         alert("Identifiants non valides");
       }
-    });
+    }).catch(error=>{console.log("error")})
 });
 
 const login = document.getElementById("loginStatus");
 
-if (localStorage.getItem("token")) {
-  login.innerHTML =
-    '<a href="login.html" class="link" id="logout"><li>logout</li></a>';
-}
+

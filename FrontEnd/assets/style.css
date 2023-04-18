@@ -2,9 +2,10 @@
    v2.0 | 20110126
    License: none (public domain)
 */
-.off{
+.hidden {
 	display: none;
 }
+
 button .off{
 	background: white;
 	color: #1D6154;
@@ -99,7 +100,7 @@ nav ul {
 
 }
 nav li {
-	padding: 0 10px;
+	padding: 0 20px;
 	font-size: 1.2em;
 }
 
@@ -217,12 +218,12 @@ footer nav ul {
 	cursor: pointer;
 }
 
-.active {
+.active{
 	color: white;
 	background-color: #1D6154;
 }
 
-.inactive {
+.inactive{
 	color: #1D6154;
 	background-color: white;
 }
@@ -240,4 +241,64 @@ footer nav ul {
 .mesProjets h2 {
 	margin-right: 15px;
 }
+/* login */
+.link{
+	text-decoration: unset;
+    color: black;
+	padding: 0 20px;
+}
+/*banner */
+#banner {
+	background-color: black;
+    color: white;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+	position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+#banner button {
+	border-radius: 60px;
+	padding: 10px 20px;
+	margin-left: 15px;
+	border: none;
+	font-family: 'Work Sans';
+}
+#banner a {
+	color: white;
+}
+#banner p {
+	display: flex;
+    flex-direction: row-reverse;
+}
 
+a {
+	text-decoration: none;
+	color: black;
+}
+
+figure a {
+	display: block;
+	width: 80%;
+	margin: 10px auto;
+}
+.fa-pen-to-square {
+    margin-right: 5px;
+}
+article h2 {
+    margin-top: 20px;
+}
+.loggedHeader {
+    margin-top: 80px;
+}
+.active {
+	color: white;
+	background-color: #1D6154;
+}
+
+.inactive {
+	color: #1D6154;
+	background-color: white;
+}

@@ -9,18 +9,24 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
 		rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+		crossorigin="anonymous">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
 </head>
 
 <body>
+	<div class="hidden" id="banner">
+	</div>
 	<header>
 		<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 		<nav>
 			<ul>
 				<li>projets</li>
 				<li>contact</li>
-				<a href="login.html" class="link" id="loginStatus"><li>login</li></a>
+				<a href="login.html" class="link" id="loginStatus">
+					<li>login</li>
+				</a>
 				<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 			</ul>
 		</nav>
@@ -29,8 +35,10 @@
 		<section id="introduction">
 			<figure>
 				<img src="./assets/images/sophie-bluel.png" alt="">
+				<a href="#" class="hidden"><i class="fa-regular fa-pen-to-square"></i>modifier</a>
 			</figure>
 			<article>
+				<a href="#" class="hidden"><i class="fa-regular fa-pen-to-square"></i>modifier</a>
 				<h2>Designer d'espace</h2>
 				<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison
 					finale du chantier.</p>
@@ -46,7 +54,7 @@
 				<h2>Mes Projets</h2>
 			</div>
 			<!--Filtre-->
-			<div class="filter">
+			<div class="filter" id=filter>
 			</div>
 			<div class="gallery"></div>
 		</section>
@@ -76,18 +84,18 @@
 		fetch("http://localhost:5678/api/works")
 			.then(response => response.json())
 			.then(data => {
-				const div = document.querySelector("#portfolio .gallery");				
-				data.forEach(elt=> {
+				const div = document.querySelector("#portfolio .gallery");
+				data.forEach(elt => {
 					console.log(elt)
-					const parent = document.createElement ('figure')
-					const child_img = document.createElement ('img')
-					const child_figcaption = document.createElement ('figcaption')
+					const parent = document.createElement('figure')
+					const child_img = document.createElement('img')
+					const child_figcaption = document.createElement('figcaption')
 
 					child_figcaption.innerHTML = elt.title
 					child_img.src = elt.imageUrl
-					child_img.alt= elt.title
+					child_img.alt = elt.title
 
-					parent.className= elt.category.name
+					parent.className = elt.category.name
 					parent.append(child_img)
 					parent.append(child_figcaption)
 					div.append(parent)
@@ -95,26 +103,81 @@
 			})
 			.catch(error => console.error(error));
 
-		const filters_arr = ['Tous', 'Objets', 'Appartements', 'Hôtels & restaurants' ],
+		const filters_arr = [
+			{ text: 'Tous', filter: 'Tous' },
+			{ text: 'Objets', filter: 'Objets' },
+			{ text: 'Appartements', filter: 'Appartements' },
+			{ text: 'Hôtels & restaurants', filter: 'Hotels & restaurants' }
+		],
 		div_filter = document.querySelector('#portfolio .filter')
 		//Intégration dynamique des boutons
 		filters_arr.forEach(item => {
-			const btn= document.createElement('button')
-			btn.class = 'btn' + item
-			btn.innerText= item 
-			btn.addEventListener("click", (e) => filterItems (e,item))
+			const btn = document.createElement('button')
+			btn.className = 'btn' + item.filter
+			btn.innerText = item.text
+			btn.addEventListener("click", (e) => filterItems(e, item.filter))
 			div_filter.append(btn)
 		})
 
-		function filterItems(e,className) {
+		function filterItems(e, className) {
 			const tmp = document.querySelectorAll('section>div>figure');
 			tmp.forEach(item => {
-				item.classList.remove('off');
-				if (item.className !== className) {
-					item.classList.add('off');
+				item.classList.remove('hidden');
+				if (item.className !== className && className !== 'Tous') {
+					item.classList.add('hidden');
 				}
 			});
 		}
+		const buttons = document.querySelectorAll(".filter button");
+
+		buttons.forEach((button) => {
+  			button.addEventListener("click", () => {
+    			buttons.forEach((btn) => {
+     	 		btn.classList.remove("active");
+     	 		btn.style.backgroundColor = "white";
+     	 		btn.style.color = "#1D6154";
+    			});
+
+   		 	button.classList.add("active");
+   		 	button.style.backgroundColor = "#1D6154";
+   		 	button.style.color = "white";
+  			});
+		});
+		var divfilter = document.getElementById("filter");
+		//changement du login en logout
+		if (localStorage.getItem("token")) {
+			document.querySelector("#loginStatus").href = "#logout"
+			loginStatus.textContent = 'logout';
+			loginStatus.addEventListener("click", e => {
+				localStorage.removeItem("token")
+				location.href = ""
+			})
+		}
+		const header = document.querySelector("header");
+		const hiddenElements = document.querySelectorAll(".hidden");
+		var divfilter = document.getElementById("filter");
+		if (localStorage.getItem("token")) {
+			divfilter.style.display = "none";
+			var p = document.createElement("p");
+			var a = document.createElement("a");
+			a.href = "#";
+			var i = document.createElement("i");
+			i.classList.add("fa-regular", "fa-pen-to-square");
+			a.appendChild(i);
+			p.textContent = "Mode édition";
+			p.appendChild(a);
+			var button = document.createElement("button");
+			button.textContent = "Publier les changements";
+			var existingDiv = document.getElementById("banner");
+			existingDiv.appendChild(p);
+			existingDiv.appendChild(button);
+			hiddenElements.forEach((element) => {
+				element.classList.remove("hidden");
+			});
+			header.classList.add("loggedHeader");
+			banner.style.display = "flex";
+		}
+
 
 	</script>
 
