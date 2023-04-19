@@ -13,6 +13,7 @@
 		crossorigin="anonymous">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
+	<link rel="stylesheet" href="./assets/modal.css">
 </head>
 
 <body>
@@ -52,7 +53,76 @@
 		<section id="portfolio">
 			<div class="mesProjets">
 				<h2>Mes Projets</h2>
+				<button class="hidden" id="showmodal"><i class="fa-regular fa-pen-to-square"></i>modifier</button>
 			</div>
+
+			<div id="modal" class="modal" disp>
+				<div class="modal-content">
+					<span class="close">&times;</span>
+					<h2>Galerie photo</h2>
+					<div class="modal-body">
+					</div>
+					<div class="modalBtn">
+						<button id="ajouter-photo">Ajouter une photo</button>
+						<button id="supprimer-galerie">Supprimer la galerie</button>
+					</div>
+				</div>
+			</div>
+
+			<div id="add-photo-modal" class="modal">
+				<div class="modal-content">
+					<div class="head">
+						<span class="backward">←</span>
+						<span class="close">&times;</span>
+					</div>
+					<h2>Ajout photo</h2>
+					<form id="add-photo-form" enctype="multipart/form-data">
+						<div class="picture flexCenter column" id="Upload_img">
+							<img src="assets/icons/image.png" alt="logo image" id="logo_image" />
+							<label class="picture_input flexCenter">+ Ajout photo<input type="file" id="image"
+									name="image" accept=".jpg, .png" /></label>
+							<p>jpg, png: 4mo max</p>
+						</div><br><br>
+						<span id="error-img"></span>
+						<label for="title">Titre :</label><br><br>
+						<input type="text" id="title" name="title" required><br><br>
+						<label for="category">Catégorie :</label><br><br>
+						<select id="category" name="category">
+							<option value="objets">Objets</option>
+							<option value="appartements">Appartements</option>
+							<option value="hotel_restaurant">Hotels & restaurants</option>
+						</select><br><br>
+						<input type="submit" value="Valider" id="valider">
+					</form>
+				</div>
+			</div>
+
+			<aside id="modal2" class="modal" style="display:none;">
+				<div class=" modal-wrapper2 js-modal-stop">
+					<div class="close-btn"><button class="js-modal-close"><span>X</span></button></div>
+					<h1 id="titlemodal">Ajouter une photo</h1>
+					<div class="modifer2">
+						<div class="preview">
+							<div class="emplacement">
+								<button name="ajt2">+ Ajouter une photo</button>
+								<p>jpg, png : 4mo max </p>
+							</div>
+						</div>
+						<div class="corps">
+							<label for="">Titre</label>
+							<input type="text">
+							<label for="">Catégorie</label>
+							<select name="im" id="">????</select>
+						</div>
+						<div class="footer-mod">
+							<button name="ajt">Valider</button>
+						</div>
+					</div>
+				</div>
+			</aside>
+
+
+
 			<!--Filtre-->
 			<div class="filter" id=filter>
 			</div>
@@ -80,6 +150,7 @@
 			</ul>
 		</nav>
 	</footer>
+
 	<script>
 		fetch("http://localhost:5678/api/works")
 			.then(response => response.json())
@@ -109,7 +180,7 @@
 			{ text: 'Appartements', filter: 'Appartements' },
 			{ text: 'Hôtels & restaurants', filter: 'Hotels & restaurants' }
 		],
-		div_filter = document.querySelector('#portfolio .filter')
+			div_filter = document.querySelector('#portfolio .filter')
 		//Intégration dynamique des boutons
 		filters_arr.forEach(item => {
 			const btn = document.createElement('button')
@@ -131,17 +202,17 @@
 		const buttons = document.querySelectorAll(".filter button");
 
 		buttons.forEach((button) => {
-  			button.addEventListener("click", () => {
-    			buttons.forEach((btn) => {
-     	 		btn.classList.remove("active");
-     	 		btn.style.backgroundColor = "white";
-     	 		btn.style.color = "#1D6154";
-    			});
+			button.addEventListener("click", () => {
+				buttons.forEach((btn) => {
+					btn.classList.remove("active");
+					btn.style.backgroundColor = "white";
+					btn.style.color = "#1D6154";
+				});
 
-   		 	button.classList.add("active");
-   		 	button.style.backgroundColor = "#1D6154";
-   		 	button.style.color = "white";
-  			});
+				button.classList.add("active");
+				button.style.backgroundColor = "#1D6154";
+				button.style.color = "white";
+			});
 		});
 		var divfilter = document.getElementById("filter");
 		//changement du login en logout
@@ -180,6 +251,7 @@
 
 
 	</script>
+	<script type="module" src="modal.js"></script>
 
 </body>
 
