@@ -23,8 +23,8 @@
 		<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 		<nav>
 			<ul>
-				<a href="index.html" class="link">projets</a>
-                <a href="contact.html" class="link">contact</a>
+				<a href="index.html" class="link" >projets</a>
+                <a href="contact.html" class="link" >contact</a>
                 <a href="login.html" class="link" id="loginStatus">login</a>
                 <img src="./assets/icons/instagram.png" alt="Instagram">
 			</ul>
@@ -70,21 +70,21 @@
 			<div id="add-photo-modal" class="modal">
 				<div class="modal-content">
 					<div class="head">
-						<span class="backward">←</span>
+						<span class="backward" id ="backward"> ← </span>
 						<span class="close">&times;</span>
 					</div>
 					<h2>Ajout photo</h2>
 					<form id="add-photo-form" enctype="multipart/form-data">
 						<div class="picture flexCenter column" id="Upload_img">
 							<img src="assets/icons/image.png" alt="logo image" id="logo_image" />
-							<label class="picture_input flexCenter">+ Ajout photo<input type="file" id="image"
+							<label class="picture_input flexCenter">+ Ajouter photo<input type="file" id="image"
 									name="image" accept=".jpg, .png" /></label>
 							<p>jpg, png: 4mo max</p>
 						</div><br><br>
 						<span id="error-img"></span>
-						<label for="title">Titre :</label><br><br>
+						<label for="title">Titre</label><br><br>
 						<input type="text" id="title" name="title" required><br><br>
-						<label for="category">Catégorie :</label><br><br>
+						<label for="category">Catégorie</label><br><br>
 						<select id="category" name="category">
 							<option value="objets">Objets</option>
 							<option value="appartements">Appartements</option>
