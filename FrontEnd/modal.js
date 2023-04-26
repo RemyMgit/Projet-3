@@ -80,18 +80,28 @@ function displayGalleryImages(images) {
     const editSpan = document.createElement('span');
     editSpan.textContent = 'éditer';
     imageContainer.appendChild(editSpan);
+    const moveIcon = document.createElement('m')
+    moveIcon.classList.add('fa-solid', 'fa-arrows-up-down-left-right', 'move-icon')
+    imageContainer.appendChild(moveIcon);
     const deleteIcon = document.createElement('i');
     deleteIcon.classList.add('fa-solid', 'fa-trash-can', 'delete-icon');
     imageContainer.appendChild(deleteIcon);
     modalBody.appendChild(imageContainer);
-    deleteIcon.addEventListener('click', function (event) {
+    imageContainer.addEventListener("mouseover", () => {
+      moveIcon.style.display = "block";
+    });
 
+    imageContainer.addEventListener("mouseout", () => {
+      moveIcon.style.display = "none";
+    });
+    
+    deleteIcon.addEventListener('click', function (event) {
       event.preventDefault();
       const index = images.indexOf(image);
       // alert(index+"    "+ii)
       if (confirm('Voulez-vous vraiment supprimer cette image ?')) {
         images.splice(index, 1);
-    
+
         const options = {
           method: 'DELETE',
           headers: {

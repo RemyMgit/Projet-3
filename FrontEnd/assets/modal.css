@@ -97,6 +97,17 @@
   padding: 5px;
 }
 
+.fa-arrows-up-down-left-right {
+  display: none;
+  cursor: pointer;
+  position: absolute;
+  top: 1px;
+  right: 30px;
+  color: white;
+  background-color: black;
+  padding: 5px;
+}
+
 .modal-content span {
   font-family: "Work Sans";
   font-style: normal;

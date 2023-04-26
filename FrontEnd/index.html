@@ -95,32 +95,6 @@
 				</div>
 			</div>
 
-			<aside id="modal2" class="modal" style="display:none;">
-				<div class=" modal-wrapper2 js-modal-stop">
-					<div class="close-btn"><button class="js-modal-close"><span>X</span></button></div>
-					<h1 id="titlemodal">Ajouter une photo</h1>
-					<div class="modifer2">
-						<div class="preview">
-							<div class="emplacement">
-								<button name="ajt2">+ Ajouter une photo</button>
-								<p>jpg, png : 4mo max </p>
-							</div>
-						</div>
-						<div class="corps">
-							<label for="">Titre</label>
-							<input type="text">
-							<label for="">Catégorie</label>
-							<select name="im" id="">????</select>
-						</div>
-						<div class="footer-mod">
-							<button name="ajt">Valider</button>
-						</div>
-					</div>
-				</div>
-			</aside>
-
-
-
 			<!--Filtre-->
 			<div class="filter" id=filter>
 			</div>
@@ -213,6 +187,7 @@
 			});
 		});
 		var divfilter = document.getElementById("filter");
+		
 		//changement du login en logout
 		if (localStorage.getItem("token")) {
 			document.querySelector("#loginStatus").href = "#logout"
@@ -224,20 +199,19 @@
 		}
 		const header = document.querySelector("header");
 		const hiddenElements = document.querySelectorAll(".hidden");
-		var divfilter = document.getElementById("filter");
 		if (localStorage.getItem("token")) {
 			divfilter.style.display = "none";
-			var p = document.createElement("p");
-			var a = document.createElement("a");
+			const p = document.createElement("p");
+			const a = document.createElement("a");
 			a.href = "#";
-			var i = document.createElement("i");
+			const i = document.createElement("i");
 			i.classList.add("fa-regular", "fa-pen-to-square");
 			a.appendChild(i);
 			p.textContent = "Mode édition";
 			p.appendChild(a);
-			var button = document.createElement("button");
+			const button = document.createElement("button");
 			button.textContent = "Publier les changements";
-			var existingDiv = document.getElementById("banner");
+			const existingDiv = document.getElementById("banner");
 			existingDiv.appendChild(p);
 			existingDiv.appendChild(button);
 			hiddenElements.forEach((element) => {

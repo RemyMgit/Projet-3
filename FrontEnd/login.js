@@ -25,7 +25,7 @@ loginForm.addEventListener("submit", (event) => {
         localStorage.setItem("token", response.token);
         window.location.href = "index.html";
       } else {
-        alert("Identifiants non valides");
+        alert("Erreur dans l’identifiant ou le mot de passe");
       }
     }).catch(error=>{console.log("error")})
 });
