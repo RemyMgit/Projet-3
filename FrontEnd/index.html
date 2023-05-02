@@ -23,10 +23,10 @@
 		<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 		<nav>
 			<ul>
-				<a href="index.html" class="link" >projets</a>
-                <a href="contact.html" class="link" >contact</a>
-                <a href="login.html" class="link" id="loginStatus">login</a>
-                <img src="./assets/icons/instagram.png" alt="Instagram">
+				<a href="index.html" class="link">projets</a>
+				<a href="contact.html" class="link">contact</a>
+				<a href="login.html" class="link" id="loginStatus">login</a>
+				<img src="./assets/icons/instagram.png" alt="Instagram">
 			</ul>
 		</nav>
 	</header>
@@ -70,7 +70,7 @@
 			<div id="add-photo-modal" class="modal">
 				<div class="modal-content">
 					<div class="head">
-						<span class="backward" id ="backward"> ← </span>
+						<span class="backward" id="backward"> ← </span>
 						<span class="close">&times;</span>
 					</div>
 					<h2>Ajout photo</h2>
@@ -157,6 +157,7 @@
 		filters_arr.forEach(item => {
 			const btn = document.createElement('button')
 			btn.className = 'btn' + item.filter
+			btn.id = 'btn' + item.filter
 			btn.innerText = item.text
 			btn.addEventListener("click", (e) => filterItems(e, item.filter))
 			div_filter.append(btn)
@@ -172,7 +173,9 @@
 			});
 		}
 		const buttons = document.querySelectorAll(".filter button");
-
+		window.addEventListener("load", function () {
+			btnTous.click()
+		})
 		buttons.forEach((button) => {
 			button.addEventListener("click", () => {
 				buttons.forEach((btn) => {
@@ -187,7 +190,7 @@
 			});
 		});
 		var divfilter = document.getElementById("filter");
-		
+
 		//changement du login en logout
 		if (localStorage.getItem("token")) {
 			document.querySelector("#loginStatus").href = "#logout"

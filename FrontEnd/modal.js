@@ -94,7 +94,7 @@ function displayGalleryImages(images) {
     imageContainer.addEventListener("mouseout", () => {
       moveIcon.style.display = "none";
     });
-    
+
     deleteIcon.addEventListener('click', function (event) {
       event.preventDefault();
       const index = images.indexOf(image);
@@ -241,17 +241,10 @@ function readFile(e) {
 }
 
 
-addPhotoCloseBtn.addEventListener('click', () => {
-  addPhotoModal.style.display = 'none';
-});
-window.addEventListener('click', (event) => {
 
-  if (event.target == addPhotoModal) {
-    addPhotoModal.style.display = 'none';
-  }
-});
 
 inputFile.addEventListener("change", readFile);
+
 // Fonction pour afficher la fenêtre modale
 function openModal() {
   modal.style.display = "block";
@@ -268,13 +261,23 @@ close.addEventListener("click", function (event) {
   closeModal();
 });
 
+addPhotoCloseBtn.addEventListener('click', () => {
+  addPhotoModal.style.display = 'none';
+});
+
+
 // Écouteur d'événement pour fermer la fenêtre modale lorsque l'utilisateur clique à l'extérieur de la fenêtre
 window.addEventListener("click", function (event) {
   if (event.target == modal) {
     closeModal();
   }
 });
-
+window.addEventListener('click', (event) => {
+  if (event.target == addPhotoModal) {
+    addPhotoModal.style.display = 'none';
+  }
+});
+// Passage de la modal ajout photo à la modal Galerie photo
 backward.addEventListener("click", function (event) {
   modal.style.display = "block";
   addPhotoModal.style.display = "none";
